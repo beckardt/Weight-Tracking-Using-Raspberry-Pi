@@ -1,6 +1,6 @@
-## Welcome to GitHub Pages
+## Our Daily Progress
 
-You can use the [editor on GitHub](https://github.com/beckardt/Weight-Tracking-Using-Raspberry-Pi/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+Day 4: We Programmed our Raspberry Pi to email us its IP address whenever it booted up. This way, we can SSH into the Raspberry Pi from our laptops without the use of a desktop. This is called a headless setup.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
