@@ -2,7 +2,48 @@
 
 Day 3: We became familiar with Cron as a we created a program that would run a python file every 5 minutes.
 
-Day 4: We Programmed our Raspberry Pi to email us its IP address whenever it booted up. This way, we can SSH into the Raspberry Pi from our laptops without the use of a desktop. This is called a headless setup.
+Day 4: We Programmed our Raspberry Pi to email us its IP address whenever it booted up. This way, we can SSH into the Raspberry Pi from our laptops without the use of a desktop. This is called a headless setup. The first step was creating a python program on the Raspberry Pi that would first get the IP, then email both me and Henry what it found. We did this in a file called getIP.py.
+
+
+```python
+
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("gmail.com", 80))
+msg= s.getsockname()[0]
+s.close()
+
+import smtplib
+
+server = smtplib.SMTP('smtp.gmail.com',587)
+server.starttls()
+server.login("scandylyfeofpi@gmail.com", "what'supdoc")
+
+server.sendmail("scandylyfeofpi@gmail.com","xhayden@bates.edu",msg)
+server.sendmail("scandylyfeofpi@gmail.com","beckardt@bates.edu",msg)
+server.quit()
+
+```
+
+Next, to get the pi to run getIP.py upon rebooting, we entered the following path...
+```shell
+sudo nano /etc/rc.local
+```
+
+Then, inputted the following code. Note that we had the program sleep, because it took the pi a non-negligable amount of time to hook up to the internet. This of course is needed to run getIP.py since it sends an email, so we don't want to have the pi run the program until wifi has been attained. 
+
+```shell
+while ! /sbin/ifconfig wlan0 | grep -q 'inet addr:[0-9]'; do
+    sleep 3
+done
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+  python /home/pi/getIP.py &
+fi
+
+exit 0
+```
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
