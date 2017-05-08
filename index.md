@@ -46,7 +46,11 @@ fi
 exit 0
 ```
 
-**Day 5**: Following the advice of the following [link](http://graham.tech/digital-scale-hack/) we connected our HX711 to our Pi. Specifically, we connected the Raspberry Pi to the HX711 using 3.3v to vcc, Raspberry Pi BCM23 to the SCK pin (The author recommended the CLK pin, but in his picture he used the SCK pin. Our version of the HX711, does not have a CLK pin. If this is a problem, we are going to order the version that does have it), BCM24 to data(DT) and ground to ground. We are going to need a load combinator since there a four sensors on the scale, and one arduino can only connect to one sensor.
+**Day 5**: Following the advice of the following [link](http://graham.tech/digital-scale-hack/) we connected our HX711 to our Pi. Specifically, we connected the Raspberry Pi to the HX711 using 3.3v to vcc, Raspberry Pi BCM23 to the SCK pin (The author recommended the CLK pin, but in his picture he used the SCK pin. Our version of the HX711, does not have a CLK pin. If this is a problem, we are going to order the version that does have it), BCM24 to data(DT) and ground to ground. 
+
+**Day 6**: Since we dont have a load combinator yet, we are going to try to get readings from just one of the four sensors for now to test python programs and if our hx711 wiring is correct. We got data from the sensor by soldering external wires to the where the sensors wires are soldered to the chip. It was messy because now there were two wires soldered to one spot, but it should work we believe. Then we connected the these wires to the hx711: Black to E-, Red to A+, and White to E+. Now there is a connection that goes from the sensor to the Pi (from the hx711). Now, we needed a library for hx711 and a script to interpret the sensors readings. We found the following [link](https://github.com/tatobari/hx711py) which provided us these things. We then copied hx711.py and example.py and attempted to run then as we put some weight on the sensor. Unfortunately, we were met with random, spiking and even negative numbers that did not seem to even notice when we put weight on the sensor. After seeing this, we examined the code and found that the person who created these python scripts was using pins 5 and 6 for SCK and DT. We then tried countless variations of pins and matching code, which all resulted in relatively similar crazy numbers.
+
+**Day 7**:
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
