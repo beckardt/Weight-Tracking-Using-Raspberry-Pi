@@ -54,6 +54,8 @@ exit 0
 
 Alas, after some serious frustration and confusion, we discovered that what we were attempting to do was not possible. See, the sensors on our scale have three wires coming out of them, but the scales that are being used in the demos we are following have four wires coming out of them that all go to the hx711. This is where the load combinator comes into play, it takes the three wires coming out of each of the sensors, and sends out four wires in total to the hx711. Now, we feel confident that once the load combinator arrives in the mail, we will be able to connect the wires from the sensors to it, then connect the combinator to the hx711, and keep our hx711 connected to our Pi and get some positive results!
 
+**Day 8**: The load combinator has arrived and we are excited to see the results it brings. We gathered from looking a few pictures and reading a link or two that we should connect each red wires to +, each black wire to - and each white wire to C. Then we connected A+, A-, B+, and B- to its match from the combinator to the hx711 (for example A+ -> A+). We then ran this [link's](https://github.com/dcrystalj/hx711py3) code, which we liked because it had a diagram showing its wiring from the hx711 to the Pi. The only difference in their wiring was that they did not need the combinator leading to the hx711 since they used a scale that had just a single sensor. We were surprised and bummed to find no significant difference in the python's scripts current output now that were using the combinator.
+
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 ### Markdown
