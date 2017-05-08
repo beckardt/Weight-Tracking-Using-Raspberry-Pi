@@ -46,7 +46,7 @@ fi
 exit 0
 ```
 
-**Day 5**: Following the advice of the following link, , we connected our HX711 to our Pi. Specifically, we connected the Raspberry Pi to the HX711 using 3.3v to vcc, Raspberry Pi BCM23 to the SCK pin (The author recommended the CLK pin, but in his picture he used the SCK pin. Our version of the HX711, does not have a CLK pin. If this is a problem, we are going to order the version that does have it), BCM24 to data(DT) and ground to ground. We are going to need a load combinator since there a four sensors on the scale, and one arduino can only connect to one sensor.
+**Day 5**: Following the advice of the following [link](http://graham.tech/digital-scale-hack/) we connected our HX711 to our Pi. Specifically, we connected the Raspberry Pi to the HX711 using 3.3v to vcc, Raspberry Pi BCM23 to the SCK pin (The author recommended the CLK pin, but in his picture he used the SCK pin. Our version of the HX711, does not have a CLK pin. If this is a problem, we are going to order the version that does have it), BCM24 to data(DT) and ground to ground. We are going to need a load combinator since there a four sensors on the scale, and one arduino can only connect to one sensor.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
