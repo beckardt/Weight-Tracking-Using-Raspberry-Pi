@@ -66,11 +66,24 @@ Now that the scale is sending information to the Pi successfully, the fun begins
 
 Next, we discussed how to turn on program, like when someone steps on the scale, how it knows to read the value. What we decided is that we should have the program always running, always reading values from the scale, only it will only print values above a certain threshold. We then had a really good idea... We want to be able to distinguish between different weighing sessions. So what we decided is that whenever a reading is above the threshold, its value is appended to an array all the way until the person steps off. At this point the array is printed, and then cleared so that the next session has an empty array to append to. Next step was to get just a single value for a session so that we could graph one point for that session. So now, instead of printing the array with the various readings, we a separate array with the date and time of the session and the median value of that mass array.
 
-**Day 13** We are now ready to start graphing points. We followed the directions of the following [link](https://wp.josh.com/2014/06/04/using-google-spreadsheets-for-logging-sensor-data/) in order to get our data to be automatically sent to google spreadsheets whenever a weighing session is complete. His directions were vary good, the only difference is that since we want to send this data to google spreadsheets from inside our python program, we couldn't use curl. Instead installed "requests", imported "requests" into our program and then all you need to do is "requests.get('url'). Using google spreadsheets is great because not only is it an easy way to append new data to a sheet, but whenever new data is appended, the line graph that we have created is automatically updated.
+**Day 13**: We are now ready to start graphing points. We followed the directions of the following [link](https://wp.josh.com/2014/06/04/using-google-spreadsheets-for-logging-sensor-data/) in order to get our data to be automatically sent to google spreadsheets whenever a weighing session is complete. His directions were vary good, the only difference is that since we want to send this data to google spreadsheets from inside our python program, we couldn't use curl. Instead installed "requests", imported "requests" into our program and then all you need to do is "requests.get('url'). Using google spreadsheets is great because not only is it an easy way to append new data to a sheet, but whenever new data is appended, the line graph that we have created is automatically updated.
 
 At this point, all we need to do is be able to distinguish between different people weighing themselves and find a way to show the weight to the person on sight (AKA not have them go to a monitor to see their weight). Hence, we have sent in an order for an LCD screen, which will have a screen to show the weight and have buttons for a person to select their profile (which we are yet to create).
 
-**Day 14**
+**Day 14**: The LCD screen was delivered, we are following the directions of the following [link](). We added one line of code to Rc/local to have example.py run on boot up:
+```shell
+while ! /sbin/ifconfig wlan0 | grep -q 'inet addr:[0-9]'; do
+    sleep 3
+done
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+  python /home/pi/getIP.py &
+  python /home/pi/example.py 
+fi
+
+exit 0
+```
 
 
 
