@@ -84,5 +84,4 @@ fi
 
 exit 0
 ```
-
-![picture 1](https://cloud.githubusercontent.com/assets/28270449/26075603/da0eec70-3983-11e7-9bf7-e3903b7c8ad8.jpg)
+![picture 1](https://cloud.githubusercontent.com/assets/28270449/26076530/09cb4e92-3987-11e7-8119-aaf7cbfb1ac3.jpg)
