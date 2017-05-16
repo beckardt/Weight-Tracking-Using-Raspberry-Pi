@@ -76,7 +76,7 @@ Next, we discussed how to turn on program, like when someone steps on the scale,
 
 At this point, all we need to do is be able to distinguish between different people weighing themselves and find a way to show the weight to the person on sight (AKA not have them go to a monitor to see their weight). Hence, we have sent in an order for an LCD screen, which will have a screen to show the weight and have buttons for a person to select their profile (which we are yet to create).
 
-**Day 14**: The LCD screen was delivered, we are following the directions of the following [link](). We added one line of code to Rc/local to have example.py run on boot up:
+**Day 14**: The LCD screen was delivered, we are following the directions of the following [link](https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/assembly) to assemble it. We added one line of code to Rc/local to have example.py run on boot up:
 ```shell
 while ! /sbin/ifconfig wlan0 | grep -q 'inet addr:[0-9]'; do
     sleep 3
@@ -90,3 +90,4 @@ fi
 
 exit 0
 ```
+**Day 15**: The LCD Scale needs to be placed on the first 13 rows of pins of the Pi. This is a problem because the hx711's VCC is connected to 5V power in the first row. So, we measured the voltage of the pins on top of the LCD screen to check for 5V. We found one that read 5.15V. So we tried plugging the VCC pin of the HX711 to this pin on the LCD and running the program and it worked! Hence, we can have the LCD screen hooked up to the Pi as well as the scale set-up. Now that it is physically set up, we got it ready for use on the Pi by following this (link)(https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/usage). Then we examined some of the example codes to learn the syntax. We entered some LCD code into example.py within the loop where the person has just stepped off the scale. It worked! Easy enough, or so we thought... The LCD code portion would only work the first time a person stepped on the scale. The next time and all times after it wouldn't work. Hence, we assumed there was an error with the "while true" as the program checked to see if buttons were being pressed. We fiddled around with placing breaks at various points to no avail. Since, neither of us were too familar with "while true" loops, we decided to hand write a while loop we were more accustommed to, and it was fixed!
