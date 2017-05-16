@@ -54,7 +54,63 @@ exit 0
 
 Note the sets of three wires (black, white, red). The one set of two wires is from the scale's battery so we ignore that set.
 
-Since we dont have a load combinator yet, we are going to try to get readings from just one of the four sensors for now to test python programs and if our hx711 wiring is correct. We got data from the sensor by soldering external wires to the where the sensors wires are soldered to the chip. It was messy because now there were two wires soldered to one spot, but it should work we believe. Then we connected the these wires to the hx711: Black to E-, Red to A+, and White to E+. Now there is a connection that goes from the sensor to the Pi (from the hx711). Now, we needed a library for hx711 and a script to interpret the sensors readings. We found the following [link](https://github.com/tatobari/hx711py) which provided us these things. We then copied hx711.py and example.py and attempted to run then as we put some weight on the sensor. Unfortunately, we were met with random, spiking and even negative numbers that did not seem to even notice when we put weight on the sensor. After seeing this, we examined the code and found that the person who created these python scripts was using pins 5 and 6 for SCK and DT. We then tried countless variations of pins and matching code, which all resulted in relatively similar crazy numbers.
+Since we dont have a load combinator yet, we are going to try to get readings from just one of the four sensors for now to test python programs and if our hx711 wiring is correct. We got data from the sensor by soldering external wires to the where the sensors wires are soldered to the chip. It was messy because now there were two wires soldered to one spot, but it should work we believe. Then we connected the these wires to the hx711: Black to E-, Red to A+, and White to E+. Now there is a connection that goes from the sensor to the Pi (from the hx711). Now, we needed a library for hx711 and a script to interpret the sensors readings. We found the following [link](https://github.com/tatobari/hx711py) which provided us these things. We then copied hx711.py and example.py and attempted to run then as we put some weight on the sensor. Example.py before we do any editing of our own looks like:
+
+```python
+import RPi.GPIO as GPIO
+import time
+import sys
+from hx711 import HX711
+
+def cleanAndExit():
+    print "Cleaning..."
+    GPIO.cleanup()
+    print "Bye!"
+    sys.exit()
+
+hx = HX711(5, 6)
+
+# I've found out that, for some reason, the order of the bytes is not always the same between versions of python, numpy and the hx711 itself.
+# Still need to figure out why does it change.
+# If you're experiencing super random values, change these values to MSB or LSB until to get more stable values.
+# There is some code below to debug and log the order of the bits and the bytes.
+# The first parameter is the order in which the bytes are used to build the "long" value.
+# The second paramter is the order of the bits inside each byte.
+# According to the HX711 Datasheet, the second parameter is MSB so you shouldn't need to modify it.
+hx.set_reading_format("LSB", "MSB")
+
+# HOW TO CALCULATE THE REFFERENCE UNIT
+# To set the reference unit to 1. Put 1kg on your sensor or anything you have and know exactly how much it weights.
+# In this case, 92 is 1 gram because, with 1 as a reference unit I got numbers near 0 without any weight
+# and I got numbers around 184000 when I added 2kg. So, according to the rule of thirds:
+# If 2000 grams is 184000 then 1000 grams is 184000 / 2000 = 92.
+#hx.set_reference_unit(113)
+hx.set_reference_unit(92)
+
+hx.reset()
+hx.tare()
+
+while True:
+    try:
+        # These three lines are usefull to debug wether to use MSB or LSB in the reading formats
+        # for the first parameter of "hx.set_reading_format("LSB", "MSB")".
+        # Comment the two lines "val = hx.get_weight(5)" and "print val" and uncomment the three lines to see what it prints.
+        #np_arr8_string = hx.get_np_arr8_string()
+        #binary_string = hx.get_binary_string()
+        #print binary_string + " " + np_arr8_string
+        
+        # Prints the weight. Comment if you're debbuging the MSB and LSB issue.
+        val = hx.get_weight(5)
+        print val
+
+        hx.power_down()
+        hx.power_up()
+        time.sleep(0.5)
+    except (KeyboardInterrupt, SystemExit):
+        cleanAndExit()
+```
+
+Unfortunately, we were met with random, spiking and even negative numbers that did not seem to even notice when we put weight on the sensor. After seeing this, we examined the code and found that the person who created these python scripts was using pins 5 and 6 for SCK and DT. We then tried countless variations of pins and matching code, which all resulted in relatively similar crazy numbers.
 
 **Day 7**: After our first day of no luck, we weren't sure if the issue lied in the code or our wiring or both. Our first idea to solve our issues was incorporating a breadboard. This would allow us to not have to have to have two wires soldered to the same spot, very close to the soldering of other wires. Our concern was short circuiting, so we unsoldered the cramped wires on the scales chip and sent them through a breadboard instead, keeping the other wiring constant. This method was bypassing the the scale's chip, so the weight would no longer be presented on the display on the scale. We decided we could live with this if it meant we were able to get the readings from the scale successfully. We would either send the data back from the breadboard or have the Pi speak out the weight in the final product. Unfortunately, even after using the breadboard and eliminating the possibility of short circuits, we still found no signs of recognition of weight from the python script.
 
@@ -90,4 +146,104 @@ fi
 
 exit 0
 ```
-**Day 15**: The LCD Scale needs to be placed on the first 13 rows of pins of the Pi. This is a problem because the hx711's VCC is connected to 5V power in the first row. So, we measured the voltage of the pins on top of the LCD screen to check for 5V. We found one that read 5.15V. So we tried plugging the VCC pin of the HX711 to this pin on the LCD and running the program and it worked! Hence, we can have the LCD screen hooked up to the Pi as well as the scale set-up. Now that it is physically set up, we got it ready for use on the Pi by following this (link)(https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/usage). Then we examined some of the example codes to learn the syntax. We entered some LCD code into example.py within the loop where the person has just stepped off the scale. It worked! Easy enough, or so we thought... The LCD code portion would only work the first time a person stepped on the scale. The next time and all times after it wouldn't work. Hence, we assumed there was an error with the "while true" as the program checked to see if buttons were being pressed. We fiddled around with placing breaks at various points to no avail. Since, neither of us were too familar with "while true" loops, we decided to hand write a while loop we were more accustommed to, and it was fixed!
+**Day 15**: The LCD Scale needs to be placed on the first 13 rows of pins of the Pi. This is a problem because the hx711's VCC is connected to 5V power in the first row. So, we measured the voltage of the pins on top of the LCD screen to check for 5V. We found one that read 5.15V. So we tried plugging the VCC pin of the HX711 to this pin on the LCD and running the program and it worked! Hence, we can have the LCD screen hooked up to the Pi as well as the scale set-up. Now that it is physically set up, we got it ready for use on the Pi by following this (link)(https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/usage). Then we examined some of the example codes to learn the syntax. We entered some LCD code into example.py within the loop where the person has just stepped off the scale. It worked! Easy enough, or so we thought... The LCD code portion would only work the first time a person stepped on the scale. The next time and all times after it wouldn't work. Hence, we assumed there was an error with the "while true" as the program checked to see if buttons were being pressed. We fiddled around with placing breaks at various points to no avail. Since, neither of us were too familar with "while true" loops, we decided to hand write a while loop we were more accustommed to, and it was fixed! Here is our code at the moment:
+```python
+
+import RPi.GPIO as GPIO
+import time
+import sys
+from hx711 import HX711
+import numpy as np
+import datetime
+import requests
+import Adafruit_CharLCD as LCD
+
+
+def cleanAndExit():
+    print "Cleaning..."
+    GPIO.cleanup()
+    print "Bye!"
+    sys.exit()
+mass = []
+hx = HX711(5, 6)
+
+# I've found out that, for some reason, the order of the bytes is not always the same between versions of python, numpy and the h$
+# Still need to figure out why does it change.
+# If you're experiencing super random values, change these values to MSB or LSB until to get more stable values.
+# There is some code below to debug and log the order of the bits and the bytes.
+# The first parameter is the order in which the bytes are used to build the "long" value.
+# The second paramter is the order of the bits inside each byte.
+# According to the HX711 Datasheet, the second parameter is MSB so you shouldn't need to modify it.
+hx.set_reading_format("LSB", "MSB")
+#hx.set_reading_format("MSB", "MSB")
+
+# HOW TO CALCULATE THE REFFERENCE UNIT
+# To set the reference unit to 1. Put 1kg on your sensor or anything you have and know exactly how much it weights.
+# In this case, 92 is 1 gram because, with 1 as a reference unit I got numbers near 0 without any weight
+# and I got numbers around 184000 when I added 2kg. So, according to the rule of thirds:
+# If 2000 grams is 184000 then 1000 grams is 184000 / 2000 = 92.
+#hx.set_reference_unit(113)
+hx.set_reference_unit(-12500)
+
+hx.reset()
+hx.tare()
+
+while True:
+    try:
+        # These three lines are usefull to debug wether to use MSB or LSB in the reading formats
+        # for the first parameter of "hx.set_reading_format("LSB", "MSB")".
+        # Comment the two lines "val = hx.get_weight(5)" and "print val" and uncomment the three lines to see what it prints.
+        #np_arr8_string = hx.get_np_arr8_string()
+        #binary_string = hx.get_binary_string()
+        #print binary_string + " " + np_arr8_string
+
+        # Prints the weight. Comment if you're debbuging the MSB and LSB issue.
+        val = hx.get_weight(5)
+        if val<5:
+                if(len(mass)>0):#person just stepped off
+                        url = 'https://script.google.com/macros/s/AKfycbxaflfjud9NMQfimC5EKvbgyOLFKDeUaDFoT3zduc9lev2XmgeZ/exec?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())
+                        requests.get(url)
+                        print [str(datetime.datetime.now()),np.median(mass)]
+                        # Initialize the LCD using the pins
+                        lcd = LCD.Adafruit_CharLCDPlate()
+                        lcd.set_color(1.0, 0.0, 0.0)
+                        lcd.clear()
+                        lcd.message('Xavier     Ben')
+                        buttons = ( (LCD.LEFT,   'Xavier weighs'+str(np.median(mass))  , (1,0,0)),
+                                    (LCD.RIGHT,  'Ben weighs'+str(np.median(mass)) , (1,0,1)) )
+                                 # Loop through each button and check if it is pressed.
+                        while i <2:
+                                 if i=1:
+                                        if lcd.is_pressed(buttons[i][0]):
+                                                # Button is pressed, change the message and backlight.
+                                                lcd.clear()
+                                                lcd.message(buttons[i][1])
+                                                lcd.set_color(buttons[i][2][0], buttons[i][2][1], buttons[i][2][2])
+                                                time.sleep(5.0)
+                                                lcd.clear()
+                                                i=3
+                                        else: i=0
+                                if i=0:
+                                        if lcd.is_pressed(buttons[i][0]):
+                                                # Button is pressed, change the message and backlight.
+                                                lcd.clear()
+                                                lcd.message(buttons[i][1])
+                                                lcd.set_color(buttons[i][2][0], buttons[i][2][1], buttons[i][2][2])
+                                                time.sleep(5.0)
+                                                lcd.clear()
+                                                i=3
+                                        else: i=1
+                time.sleep(1)
+                mass=[]
+        else:
+                mass.append(val)
+
+
+        hx.power_down()
+        hx.power_up()
+        time.sleep(0.5)
+    except (KeyboardInterrupt, SystemExit):
+        cleanAndExit()
+
+```
+It does basically everything we want it to do at this point except 1) I havent made a google spreadsheet yet to have my weight added to and 2) we want to find a better way to have the user select who they are. At the moment, there are just two names shown (Xavier on the left and Me on the right) and the person just hits right or left. This will only work smoothly for two people. We want to be able to arrange 4 names on the screen: one centered top, one right, one left, and one centered bottom so that the four 4 buttons can be used.
