@@ -184,7 +184,11 @@ fi
 exit 0
 ```
 ## Day 15 
-The LCD Scale needs to be placed on the first 13 rows of pins of the Pi. This is a problem because the hx711's VCC is connected to 5V power in the first row. So, we measured the voltage of the pins on top of the LCD screen to check for 5V. We found one that read 5.15V. So we tried plugging the VCC pin of the HX711 to this pin on the LCD and running the program and it worked! Hence, we can have the LCD screen hooked up to the Pi as well as the scale set-up. Now that it is physically set up, we got it ready for use on the Pi by following this [link](https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/usage). Then we examined some of the example codes to learn the syntax. We entered some LCD code into example.py within the loop where the person has just stepped off the scale. It worked! Easy enough, or so we thought... The LCD code portion would only work the first time a person stepped on the scale. The next time and all times after it wouldn't work. Hence, we assumed there was an error with the "while true" as the program checked to see if buttons were being pressed. We fiddled around with placing breaks at various points to no avail. Since, neither of us were too familar with "while true" loops, we decided to hand write a while loop we were more accustommed to, and it was fixed! Here is our code at the moment:
+The LCD Scale needs to be placed on the first 13 rows of pins of the Pi. This is a problem because the hx711's VCC is connected to 5V power in the first row. So, we measured the voltage of the pins on top of the LCD screen to check for 5V. We found one that read 5.15V. So we tried plugging the VCC pin of the HX711 to this pin on the LCD and running the program and it worked! Hence, we can have the LCD screen hooked up to the Pi as well as the scale set-up. Here is the LCD on the Pi:
+
+![img_2414](https://cloud.githubusercontent.com/assets/28270449/26220803/1de4a7c2-3be2-11e7-966d-69eb3c8b56f4.JPG)
+
+Now that it is physically set up, we got it ready for use on the Pi by following this [link](https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/usage). Then we examined some of the example codes to learn the syntax. We entered some LCD code into example.py within the loop where the person has just stepped off the scale. It worked! Easy enough, or so we thought... The LCD code portion would only work the first time a person stepped on the scale. The next time and all times after it wouldn't work. Hence, we assumed there was an error with the "while true" as the program checked to see if buttons were being pressed. We fiddled around with placing breaks at various points to no avail. Since, neither of us were too familar with "while true" loops, we decided to hand write a while loop we were more accustommed to, and it was fixed! Here is our code at the moment:
 ```python
 
 import RPi.GPIO as GPIO
@@ -395,3 +399,7 @@ while True:
         cleanAndExit()
                              
 ```
+
+Here is the final physical product:
+
+![img_2414](https://cloud.githubusercontent.com/assets/28270449/26220800/1b737cfc-3be2-11e7-989b-d7b99a628fe1.JPG)
