@@ -403,3 +403,7 @@ while True:
 Here is the final physical product:
 
 ![img_2414](https://cloud.githubusercontent.com/assets/28270449/26220800/1b737cfc-3be2-11e7-989b-d7b99a628fe1.JPG)
+
+And here is a few days of weight tracking for Xavier:
+
+
