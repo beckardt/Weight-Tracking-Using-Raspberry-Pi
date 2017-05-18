@@ -143,6 +143,7 @@ Alas, after some serious frustration and confusion, we discovered that what we w
 
 ## Day 8
 The load combinator has arrived and we are excited to see the results it brings. We gathered from looking a few pictures and reading a link or two that we should connect each red wire to +, each black wire to - and each white wire to C. Then we connected A+, A-, B+, and B- to its match from the combinator to the hx711 (for example A+ on load combinator to  A+ on hx711). We then ran this [link's](https://github.com/dcrystalj/hx711py3) code, which we liked because it had a diagram showing its wiring from the hx711 to the Pi. The only difference in their wiring was that they did not need the combinator leading to the hx711 since they used a scale that had just a single sensor. We were surprised and bummed to find no significant difference in the python's scripts current output now that were using the combinator. Here is our wiring to the combinator board:
+
 ![img_2363](https://cloud.githubusercontent.com/assets/28270449/26218743/1e73e4bc-3bda-11e7-9713-88e19bbbc4e9.JPG)
 ![img_2364](https://cloud.githubusercontent.com/assets/28270449/26218907/b3047cb8-3bda-11e7-9be5-1365016160cf.JPG)
 
