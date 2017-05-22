@@ -1,2 +1,2 @@
-# How to
-This is xavier typing in line 2
+# How to: Digital Weight Tracking With Raspberry Pi
+## By Ben Eckardt and Xavier Hayden
