@@ -34,7 +34,7 @@ Materials NOT Listed:
 ### 1. Preparing Your Pi and Google Spreadsheet
 
 
-### 2. Physical Set Up
+### 2. Physical Set Up Before LCD Screen
   i. Unsolder the scale's sensor wires from the scale's chip.
   
   The next two steps are useful because the scale's wires will most likely be cheap and flimsy. We recommend this to allow for cleaner, easier soldering to the combinator board.
@@ -48,6 +48,12 @@ Materials NOT Listed:
   v. Solder shield headers to load combinator out holes and to hx711 in/out holes like so:
   
   vi. Using female-female wires, connect the Pi to the HX711 like so: BCM5 to DT, ground to ground, BCM6 to SCK and 5V to VCC. And the combinator board to the hx711 like so: Red to E+, Black to E-, White to A-, and Green to A+.
+  
+  ### 3. Testing your Scale and Wiring
+   
+   i. Run hx711.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something.
+   
+   ii. Run test.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something. If there are no errors you should be met with some numbers that increase up as you push on the sensors/scale. If this is the case, we are good to go and can now attach the screen.
   
 
 
