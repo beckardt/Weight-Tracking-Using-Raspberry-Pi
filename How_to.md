@@ -54,6 +54,14 @@ Materials NOT Listed:
    i. Run hx711.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something.
    
    ii. Run test.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something. If there are no errors you should be met with some numbers that increase up as you push on the sensors/scale. If this is the case, we are good to go and can now attach the screen.
+   
+  ### 3. Using the LCD
+  
+   i. Follow the steps on this (link)[] to assemble the LCD Screen.
+   
+   ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire.
+   
+   iii. Now you can run example.py, step on the scale, step off the scale, choose your name, and your weight will be sent to your spreadsheet!
   
 
 
