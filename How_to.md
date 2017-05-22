@@ -31,14 +31,24 @@ Materials NOT Listed:
 
 ## Instructions
 
-### 1. Preparing Your Pi
+### 1. Preparing Your Pi and Google Spreadsheet
 
 
 ### 2. Physical Set Up
-
-  i. Solder shield headers to load combinator out holes and to hx711 in/out holes like so:
+  i. Unsolder the scale's sensor wires from the scale's chip.
   
-  ii.using female 
+  The next two steps are useful because the scale's wires will most likely be cheap and flimsy. We recommend this to allow for cleaner, easier soldering to the combinator board.
+  
+  ii. Strip some of the rubber coating from each wire so that you have enough of a metal tip to work with.
+  
+  iii. for each wire, wrap the exposed metal part around the exposed metal part of the solid core wires to enable a stronger connection, and solder the two together, then protect the soldering by taping the region closed with electrical tape.
+  
+  iv. Solder the wires to the combinator board. The combinator board has groups of holes for the upper left sensor (UL), upper right sensor (UR), lower left sensor (LL), and lower right sensor (LR). These match up with the sensors as if the scale was right side up. So when the scale is upside, the upper right sensors wires go to the upper left group, etc...
+
+  v. Solder shield headers to load combinator out holes and to hx711 in/out holes like so:
+  
+  vi. Using female-female wires, connect the Pi to the HX711 like so: BCM5 to DT, ground to ground, BCM6 to SCK and 5V to VCC. And the combinator board to the hx711 like so: Red to E+, Black to E-, White to A-, and Green to A+.
+  
 
 
 
