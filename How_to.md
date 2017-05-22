@@ -33,6 +33,8 @@ Materials NOT Listed:
 
 ### 1. Preparing Your Pi and Google Spreadsheet
 
+Follow the directions of this [link](https://wp.josh.com/2014/06/04/using-google-spreadsheets-for-logging-sensor-data/) to set up your google spreadsheet. Then insert a line graph chart. 
+
 
 ### 2. Physical Set Up Before LCD Screen
   i. Unsolder the scale's sensor wires from the scale's chip.
@@ -53,7 +55,7 @@ Materials NOT Listed:
    
    i. Run hx711.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something.
    
-   ii. Run test.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something. If there are no errors you should be met with some numbers that increase up as you push on the sensors/scale. If this is the case, we are good to go and can now attach the screen.
+   ii. Run test.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something. If there are no errors you should be met with some numbers that increase up as you push on the sensors/scale. If this is the case, set your reference unit by following the directions in test.py. 
    
   ### 3. Using the LCD
   
