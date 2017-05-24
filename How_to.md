@@ -60,6 +60,7 @@ Sudo pip install (whatever you want to install)
   
   iii. for each wire, wrap the exposed metal part around the exposed metal part of the solid core wires to enable a stronger connection, and solder the two together, then protect the soldering by taping the region closed with electrical tape. Here is a picture of the wrapping of the two wires, before soldering and taping:
   
+  ![img_9548](https://cloud.githubusercontent.com/assets/28270466/26419699/8e1122c2-408e-11e7-8e82-b0a160fca34a.JPG)
   
   
   iv. Solder the wires to the combinator board. The combinator board has groups of holes for the upper left sensor (UL), upper right sensor (UR), lower left sensor (LL), and lower right sensor (LR). These match up with the sensors as if the scale was right side up. So when the scale is upside down, the upper right sensors wires go to the upper left group, etc... We connected each red wire to its corresponding C hole, each White wire to its corresponding + hole, and each black wire to its corresponding - hole on the the combinator board. We've read that scales can vary here so you might need to mess around with the wiring.
