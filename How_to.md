@@ -72,7 +72,7 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
    
    ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire.
    
-   iii. Now create a file called weight_tracker.py and copy this code into it and make the necessary adjustments as denoted in the comments:
+   iii. Now create a file called weight_tracker.py and copy this code into it and make the necessary adjustments as denoted where ever there is a tripe #, like so ###.
    
    ```python
 
