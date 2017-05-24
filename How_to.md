@@ -43,6 +43,12 @@ Nano hx711.py
 ```
 then copy and pasting the given hx711.py code inside. Then do the same for example.py
 
+iii. You will need to type this into your shell for basically everything that you see imported in the top of the code (for every code you use).
+```shell 
+Sudo pip install (whatever you want to install)
+```
+
+
 
 
 ### 2. Physical Set Up Before LCD Screen
@@ -74,7 +80,7 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
   
    i. Follow the steps on this [link](https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/assembly) to assemble the LCD Screen.
    
-   ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire. Here is a picture of the LCD screen on the Pi:
+   ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire.
    
    iii. Now create a file called weight_tracker.py and copy this code into it and make the necessary adjustments as denoted where ever you see ###.
    
