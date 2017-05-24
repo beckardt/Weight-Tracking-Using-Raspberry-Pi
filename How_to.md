@@ -5,6 +5,8 @@ During Short Term 2017 at Bates College, Ben and Xavier set out to hack a digita
 
 ![img_2414](https://cloud.githubusercontent.com/assets/28270449/26220800/1b737cfc-3be2-11e7-989b-d7b99a628fe1.JPG)
 
+Please note that a LCD screen was used in the scale to allow the user to select his or her profile (so the program would know where to send the person's weight) and to show the person's weight. The scale's original screen was taken out of the equation because the wires leading to the chip were redirected.
+
 And here is a few days of weight tracking for Xavier:
 
 ![screen shot 2017-05-18 at 3 57 51 pm](https://cloud.githubusercontent.com/assets/28270449/26221010/ec77765a-3be2-11e7-8b76-eefd1890bf73.png)
