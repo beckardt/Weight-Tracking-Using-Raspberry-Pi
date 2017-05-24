@@ -66,13 +66,123 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
    
    ii. Run test.py to see if there are any errors. If so you will probably just have to "Sudo pip install" something. If there are no errors you should be met with some numbers that increase up as you push on the sensors/scale. If this is the case, set your reference unit by following the directions in example.py. (you will use the same reference unit in weighttracker.py)
    
-  ### 3. Using the LCD
+  ### 4. Using the LCD
   
    i. Follow the steps on this (link)[] to assemble the LCD Screen.
    
    ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire.
    
-   iii. Now you can run example.py, step on the scale, step off the scale, choose your name, and your weight will be sent to your spreadsheet!
+   iii. Now create a file called weight_tracker.py and copy this code into it and make the necessary adjustments as denoted in the comments:
+   
+   ```python
+
+import RPi.GPIO as GPIO
+import time
+import sys
+from hx711 import HX711
+import numpy as np
+import datetime
+import requests
+import Adafruit_CharLCD as LCD
+
+
+def cleanAndExit():
+    print "Cleaning..."
+    GPIO.cleanup()
+    print "Bye!"
+    sys.exit()
+mass = []
+hx = HX711(5, 6)
+
+# I've found out that, for some reason, the order of the bytes is not always the same between versions of python, numpy and the h$
+# Still need to figure out why does it change.
+# If you're experiencing super random values, change these values to MSB or LSB until to get more stable values.
+# There is some code below to debug and log the order of the bits and the bytes.
+# The first parameter is the order in which the bytes are used to build the "long" value.
+# The second paramter is the order of the bits inside each byte.
+# According to the HX711 Datasheet, the second parameter is MSB so you shouldn't need to modify it.
+hx.set_reading_format("LSB", "MSB")
+#hx.set_reading_format("MSB", "MSB")
+
+# HOW TO CALCULATE THE REFFERENCE UNIT
+# To set the reference unit to 1. Put 1kg on your sensor or anything you have and know exactly how much it weights.
+# In this case, 92 is 1 gram because, with 1 as a reference unit I got numbers near 0 without any weight
+# and I got numbers around 184000 when I added 2kg. So, according to the rule of thirds:
+# If 2000 grams is 184000 then 1000 grams is 184000 / 2000 = 92.
+#hx.set_reference_unit(113)
+hx.set_reference_unit(-12175.0)
+
+hx.reset()
+hx.tare()
+ # Initialize the LCD using the pins
+lcd = LCD.Adafruit_CharLCDPlate()
+lcd.set_color(1.0, 0.0, 0.0)
+lcd.clear()
+
+while True:
+    try:
+        # These three lines are usefull to debug wether to use MSB or LSB in the reading formats
+        # for the first parameter of "hx.set_reading_format("LSB", "MSB")".
+        # Comment the two lines "val = hx.get_weight(5)" and "print val" and uncomment the three lines to see what it prints.
+        #np_arr8_string = hx.get_np_arr8_string()
+        #binary_string = hx.get_binary_string()
+        #print binary_string + " " + np_arr8_string
+
+        # Prints the weight. Comment if you're debbuging the MSB and LSB issue.
+        val =hx.get_weight(5)
+        val = str(val)
+        val = val[0:5]
+        val = float(val)
+        if val<5:
+                if(len(mass)>0):#person just stepped off
+                        print [str(datetime.datetime.now()),np.median(mass)]
+                        #Put in the names of the people who's weight you will track, if there are more than two, you will need to assign them to other buttons. 
+                        #Next Replace the urls with the urls of your google spreadsheets, keeping everything after and including the ? the same
+                        lcd.message('Xavier     Ben')
+                        buttons = ( (LCD.LEFT,   'Weight:'+str(np.median(mass))  , (1,0,0),'https://script.google.com/macros/s/AKfycbzQ_D_fOlq1JDe7hOYTjMG5-WJ1vdbcXao_3grixn_8j0bSr76w/exec?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())),
+                                    (LCD.RIGHT,  'Weight:'+str(np.median(mass)) , (1,0,1),'https://script.google.com/macros/s/AKfycbw0K53MaQljtafrPS9wbCBZ_BsdX4nkEr8m-P7BSnNqNMWxg0E/exec?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())) )
+                                 # Loop through each button and check if it is pressed.
+
+                        i=0
+                        while i <2:
+                                if i==1:
+                                        if lcd.is_pressed(buttons[i][0]):
+                                                # Button is pressed, change the message and backlight and send data to spreadsheet.
+                                                lcd.clear()
+                                                lcd.message(buttons[i][1])
+                                                lcd.set_color(buttons[i][2][0], buttons[i][2][1], buttons[i][2][2])
+                                                url=buttons[1][3]
+                                                requests.get(url)
+                                                time.sleep(5.0)
+                                                lcd.clear()
+                                                i=3
+                                        else: i=0
+                                if i==0:
+                                        if lcd.is_pressed(buttons[i][0]):
+                                                # Button is pressed, change the message and backlight and send data to spreadsheet.
+                                                lcd.clear()
+                                                lcd.message(buttons[i][1])
+                                                lcd.set_color(buttons[i][2][0], buttons[i][2][1], buttons[i][2][2])
+                                                url=buttons[0][3]
+                                                requests.get(url)
+                                                time.sleep(5.0)
+                                                lcd.clear()
+                                                i=3
+                                        else: i=1
+                time.sleep(1)
+                mass=[]
+        else:
+                mass.append(val)
+
+
+        hx.power_down()
+        hx.power_up()
+        time.sleep(0.5)
+    except (KeyboardInterrupt, SystemExit):
+        cleanAndExit()
+                             
+```
+   iii. Now you can run weight_tracker.py, step on the scale, step off the scale, choose your name, and your weight will be sent to your spreadsheet!
   
 
 
