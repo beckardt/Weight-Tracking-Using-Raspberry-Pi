@@ -176,6 +176,16 @@ while True:
 ```
    iii. Now you can run weight_tracker.py, step on the scale, step off the scale, choose your name, and your weight will be sent to your spreadsheet!
   
+## Possible issues
 
+i. The biggest issue we faced, by far, was dealing with the quality of the wires from the load cell sensors. The fact that they were so flimsy and small, made it incredibly difficult to solder or even to try and incorporate a breadboard. We highly recommend taking the time to strengthen the wires by soldering them to the solid core wires. Although it took us a few hours to do, it eliminated so much frustration that we had with the other wires.
+
+ii. Figuring out the correct GPIO pinout was a bit confusing because many guides suggested slightly different pinouts. The link we chose to follow actually showed the hx711 board hooked up to the pi, so this gave us the most confidence that it would work for us.
+
+iii. Any digital scale should work. Don’t second guess yourself, as long as it’s digital then it’s fine.
+
+iv.You CANNOT test this set up with just one load cell sensor with three wires coming out of it. That will not be compatible with the hx711 board. Hence, you wont be able to test anything until all four sensors are connected to the combinator board.
+
+v. An easily fixed but hard to recognize problem that plagued us for a while was just that some female-female wires are just no good. So before you go an resolder everything and fiddle around with different wiring schemes, try replacing your female-female wires with fresh ones.
 
 
