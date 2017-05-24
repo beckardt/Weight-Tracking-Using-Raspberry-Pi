@@ -72,9 +72,9 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
    
   ### 4. Using the LCD
   
-   i. Follow the steps on this (link)[] to assemble the LCD Screen.
+   i. Follow the steps on this [link](https://learn.adafruit.com/adafruit-16x2-character-lcd-plus-keypad-for-raspberry-pi/assembly) to assemble the LCD Screen.
    
-   ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire.
+   ii. Since the LCD Screen is most easily hooked up to the Pi by sitting it on top of the first 13 rows of pins, we need a new way to attach the hx711's VCC to 5V power. Solve this problem by measuring the voltage of the pins on top of the LCD and seeing which ones are around 5 volts. Whichever is like this, we can attach the VCC to this pin through a female-female wire. Here is a picture of the LCD screen on the Pi:
    
    iii. Now create a file called weight_tracker.py and copy this code into it and make the necessary adjustments as denoted where ever there is a tripe #, like so ###.
    
