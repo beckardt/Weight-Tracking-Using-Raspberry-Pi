@@ -52,10 +52,10 @@ Nano hx711.py
 ```
 then copy and pasting the given hx711.py code inside. Then do the same for example.py
 
-iii. You will need to type this into your shell for basically everything that you see imported in the top of the code (for every code you use).
-```shell 
-Sudo pip install (whatever you want to install)
-```
+iii. You will need to install at least the following packages:
+
+RPI.GPIO  sys    numpy    datetime     requests    Adafruit_CharLCD   
+
 
 
 
