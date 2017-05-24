@@ -52,9 +52,11 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
   
   ii. Strip some of the rubber coating from each wire so that you have enough of a metal tip to work with.
   
-  iii. for each wire, wrap the exposed metal part around the exposed metal part of the solid core wires to enable a stronger connection, and solder the two together, then protect the soldering by taping the region closed with electrical tape.
+  iii. for each wire, wrap the exposed metal part around the exposed metal part of the solid core wires to enable a stronger connection, and solder the two together, then protect the soldering by taping the region closed with electrical tape. Here is a picture of the wrapping of the two wires, before soldering and taping:
   
-  iv. Solder the wires to the combinator board. The combinator board has groups of holes for the upper left sensor (UL), upper right sensor (UR), lower left sensor (LL), and lower right sensor (LR). These match up with the sensors as if the scale was right side up. So when the scale is upside, the upper right sensors wires go to the upper left group, etc... We connected each red wire to its corresponding C hole, each White wire to its corresponding + hole, and each black wire to its corresponding - hole on the the combinator board. We've read that scales can vary here so you might need to mess around with the wiring.
+  
+  
+  iv. Solder the wires to the combinator board. The combinator board has groups of holes for the upper left sensor (UL), upper right sensor (UR), lower left sensor (LL), and lower right sensor (LR). These match up with the sensors as if the scale was right side up. So when the scale is upside down, the upper right sensors wires go to the upper left group, etc... We connected each red wire to its corresponding C hole, each White wire to its corresponding + hole, and each black wire to its corresponding - hole on the the combinator board. We've read that scales can vary here so you might need to mess around with the wiring.
 
   v. Solder shield headers to load combinator out holes and to hx711 in/out holes like so:
   
