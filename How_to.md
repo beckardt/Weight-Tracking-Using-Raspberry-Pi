@@ -35,7 +35,14 @@ Materials NOT Listed:
 
 ### 1. Preparing Your Pi and Google Spreadsheet
 
-Follow the directions of this [link](https://wp.josh.com/2014/06/04/using-google-spreadsheets-for-logging-sensor-data/) to set up your google spreadsheet. (make sure to copy the url given to you at the end). Then insert a line graph chart.
+i. Follow the directions of this [link](https://wp.josh.com/2014/06/04/using-google-spreadsheets-for-logging-sensor-data/) to set up your google spreadsheet. (make sure to copy the url given to you at the end). Then insert a line graph chart.
+
+ii. Go to the following [link](https://github.com/tatobari/hx711py) and create equivalent hx711.py and example.py files by copy and pasting their contents into files you have created on your Pi. For new programmers, type this in your shell:
+```shell 
+Nano hx711.py
+```
+then copy and pasting the given hx711.py code inside. Then do the same for example.py
+
 
 
 ### 2. Physical Set Up Before LCD Screen
