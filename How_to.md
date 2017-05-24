@@ -54,7 +54,17 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
 
 iii. You will need to install at least the following packages:
 
-RPI.GPIO  sys    numpy    datetime     requests    Adafruit_CharLCD   
+RPI.GPIO
+
+sys
+
+numpy
+
+datetime
+
+requests
+
+Adafruit_CharLCD   
 
 
 
