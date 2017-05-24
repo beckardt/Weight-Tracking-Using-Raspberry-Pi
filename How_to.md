@@ -34,7 +34,9 @@ Materials NOT Listed:
 
 ## R Pi System description:
 Pi model: Raspberry Pi 3 Model B
+
 OS Version: Rasbian 8.0
+
 Python Version: Python 2.7.9
 
 
