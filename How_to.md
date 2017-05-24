@@ -21,6 +21,7 @@ And here is a few days of weight tracking for Xavier:
 6. Breadboard female to female wires - 4$
 7. Solid Core Wire - 3$
 8. Shield Headers - 2$
+
 *Price of scale varies, though any digital scale is compatible for this project.
 
 Materials NOT Listed:
