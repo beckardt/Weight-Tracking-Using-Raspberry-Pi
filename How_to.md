@@ -85,6 +85,9 @@ Sudo pip install (whatever you want to install)
    
    iii. Now create a file called weight_tracker.py and copy this code into it and make the necessary adjustments as denoted where ever you see ###.
    
+   The adjustments we made to example.py to accomplish our goals:
+          whenever someone steps on the scale, readings are appended to an array until they step off (5 lb threshold). When the person steps off, they are asked who they are by the LCD screen. When they choose who they are, the median of the created array is taken as well as the current date and time. These are appended to that person's url so that their data is sent to their spreadsheet. Now the array is cleared and ready for the next time someone steps on to repeat the cycle. Note that scale is always reading values, it is just only recording them to an array when its over 5 lbs. 
+   
    ```python
 
 import RPi.GPIO as GPIO
