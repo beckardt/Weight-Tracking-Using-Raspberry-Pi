@@ -58,6 +58,8 @@ then copy and pasting the given hx711.py code inside. Then do the same for examp
 
   v. Solder shield headers to load combinator out holes and to hx711 in/out holes like so:
   
+  ![img_9547](https://cloud.githubusercontent.com/assets/28270466/26418795/8d628d5a-408b-11e7-9c8b-a7969bb10a79.JPG)\
+  
   vi. Using female-female wires, connect the Pi to the HX711 like so: BCM5 to DT, ground to ground, BCM6 to SCK and 5V to VCC. And the combinator board to the hx711 like so: Red to E+, Black to E-, White to A-, and Green to A+.
   
   ### 3. Testing your Scale and Wiring
