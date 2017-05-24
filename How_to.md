@@ -137,10 +137,11 @@ while True:
                 if(len(mass)>0):#person just stepped off
                         print [str(datetime.datetime.now()),np.median(mass)]
                         #Put in the names of the people who's weight you will track, if there are more than two, you will need to assign them to other buttons. 
-                        #Next Replace the urls with the urls of your google spreadsheets, keeping everything after and including the ? the same
-                        lcd.message('Xavier     Ben')
-                        buttons = ( (LCD.LEFT,   'Weight:'+str(np.median(mass))  , (1,0,0),'https://script.google.com/macros/s/AKfycbzQ_D_fOlq1JDe7hOYTjMG5-WJ1vdbcXao_3grixn_8j0bSr76w/exec?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())),
-                                    (LCD.RIGHT,  'Weight:'+str(np.median(mass)) , (1,0,1),'https://script.google.com/macros/s/AKfycbw0K53MaQljtafrPS9wbCBZ_BsdX4nkEr8m-P7BSnNqNMWxg0E/exec?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())) )
+                        #next replace the (User 1 URL) with the Url given of your google spreadsheet, keeping the single quote at the front
+                        lcd.message('User1     User2')
+                        buttons = ( (LCD.LEFT,   'Weight:'+str(np.median(mass))  , (1,0,0),'(User 1 URL)?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())),
+                                    (LCD.RIGHT,  'Weight:'+str(np.median(mass)) , (1,0,1),'(User 2 URL)?weight='+ str(np.median(mass)) +'&date='+str(datetime.datetime.now())) )
+
                                  # Loop through each button and check if it is pressed.
 
                         i=0
