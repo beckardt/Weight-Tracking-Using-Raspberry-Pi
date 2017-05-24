@@ -69,7 +69,7 @@ Sudo pip install (whatever you want to install)
   
 ![img_9547](https://cloud.githubusercontent.com/assets/28270466/26419693/8519d196-408e-11e7-8dd7-3e943b87cb34.JPG)
   
-  vi. Using female-female wires, connect the Pi to the HX711 like so: BCM5 to DT, ground to ground, BCM6 to SCK and 5V to VCC. And the combinator board to the hx711 like so: Red to E+, Black to E-, White to A-, and Green to A+.
+  vi. Using female-female wires, connect the Pi to the HX711 like so: BCM5 to DT, ground to ground, BCM6 to SCK and 5V to VCC. Here is a link that shows the arrangement of pins on the Pi: [link](https://pinout.xyz/pinout/ground). And the combinator board to the hx711 like so: Red to E+, Black to E-, White to A-, and Green to A+.
   
   ### 3. Testing your Scale and Wiring
    
