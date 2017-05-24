@@ -66,7 +66,7 @@ Sudo pip install (whatever you want to install)
 
   v. Solder shield headers to load combinator out holes and to hx711 in/out holes like so:
   
-![img_9547](https://cloud.githubusercontent.com/assets/28270466/26419591/32a9fe9a-408e-11e7-8aff-2d0e613bee05.JPG)
+![img_9547](https://cloud.githubusercontent.com/assets/28270466/26419693/8519d196-408e-11e7-8dd7-3e943b87cb34.JPG)
   
   vi. Using female-female wires, connect the Pi to the HX711 like so: BCM5 to DT, ground to ground, BCM6 to SCK and 5V to VCC. And the combinator board to the hx711 like so: Red to E+, Black to E-, White to A-, and Green to A+.
   
